@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>DASHBOARD ANALYTICS</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="assets/vendors/jvectormap/jquery-jvectormap.css">
+    <link rel="stylesheet" href="assets/vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="assets/vendors/owl-carousel-2/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/vendors/owl-carousel-2/owl.theme.default.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap4.min.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="assets/images/favicon.png" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+  </head>
+  <body class="sidebar-icon-only">
+    <div id="app" class="container-scroller">
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+          <!-- <a class="sidebar-brand brand-logo" href="index.html"><img src="assets/images/logo.svg" alt="logo" /></a> -->
+          <!-- <a class="sidebar-brand brand-logo-mini" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo" /></a> -->
+        </div>
+        <ul class="nav">
+          <li class="nav-item profile">
+            <div class="profile-desc">
+              <div class="profile-pic">
+                <div class="count-indicator">
+                  <img class="img-xs rounded-circle " src="assets/images/user.png" alt="">
+                  <span class="count bg-success"></span>
+                </div>
+                <div class="profile-name">
+                  <h5 class="mb-0 font-weight-normal">{{ message }}</h5>
+                  <!-- <span>Gold Member</span> -->
+                </div>
+              </div>
+              
+            </div>
+          </li>
+          <li class="nav-item nav-category">
+            <span class="nav-link">Navigation</span>
+          </li>
+          <li class="nav-item menu-items" id="div-dashboard">
+            <a class="nav-link" href="home.html">
+              <span class="menu-icon">
+                <i class="mdi mdi-speedometer"></i>
+              </span>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items" id="div-router">
+            <a class="nav-link" href="router.html">
+              <span class="menu-icon">
+                <i class="mdi mdi-router-wireless-settings"></i>
+              </span>
+              <span class="menu-title">Manajemen Router</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items" id="div-analytics">
+            <a class="nav-link" href="analytics.html">
+              <span class="menu-icon">
+                <i class="mdi mdi-file-document-box"></i>
+              </span>
+              <span class="menu-title">Analytics</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items" id="div-helpdesk">
+            <a class="nav-link" href="helpdesk.html">
+              <span class="menu-icon">
+                <i class="mdi mdi-account-edit"></i>
+              </span>
+              <span class="menu-title">Helpdesk</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items" id="div-manajemen-user">
+            <a class="nav-link" href="users.html">
+              <span class="menu-icon">
+                <i class="mdi mdi-account-group"></i>
+              </span>
+              <span class="menu-title">Manajemen User</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_navbar.html -->
+        <nav class="navbar p-0 fixed-top d-flex flex-row">
+          <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
+            <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo" /></a>
+          </div>
+          <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+            <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+              <span class="mdi mdi-menu"></span>
+            </button>
+            <ul class="navbar-nav navbar-nav-right">
+              <li class="nav-item dropdown">
+                <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
+                  <div class="navbar-profile">
+                    <img class="img-xs rounded-circle" src="assets/images/user.png" alt="">
+                    <p class="mb-0 d-none d-sm-block navbar-profile-name"><span id="username"></span></p>
+                    <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                  </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
+                  <h6 class="p-3 mb-0">Profile</h6>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item" href="javascript:void(0)">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-access-point-network text-success"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Active Router <br>
+                      <span class="text-small" id="active-router"></span></p>
+                    </div>
+                  </a>
+                  <a class="dropdown-item preview-item" id="router-list" href="javascript:void(0)">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-laptop text-primary"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">List Router</p>
+                    </div>
+                  </a>
+                  <a class="dropdown-item preview-item" href="/">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-logout text-danger"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Log out</p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <p class="p-3 mb-0 text-center" id="hour">
+                    
+                  </p>
+                </div>
+              </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+              <span class="mdi mdi-format-line-spacing"></span>
+            </button>
+          </div>
+        </nav>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <!-- // -->
+            <!-- Modal -->
+            <div class="modal fade" id="helpdeskModal" tabindex="-1" aria-labelledby="helpdeskModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="helpdeskModalLabel">Edit Ticket</h5>
+                    <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formHelpdeskUpdate">
+                        <div class="form-group">
+                          <label for="">Requested By:</label>
+                          <input type="text" id="request_by" name="user" value="" class="form-control">
+                        </div>
+                        <div class="form-group">
+                          <label for="">Detail:</label>
+                          <!-- <input type="text" id="request_by" name="user" value="" class="form-control"> -->
+                          <input type="hidden" id="id_edit" name="id" value="" class="form-control">
+                          <input type="hidden" id="user_id_edit" name="user_id" value="" class="form-control">
+                          <textarea name="detail" id="detail_edit" class="form-control" cols="30" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                          <label for="">Note:</label>
+                          <textarea name="note" id="note_edit" class="form-control" cols="30" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                          <label for="">Priority Level:</label>
+                          <select name="priority_id" class="form-control" id="priority_id">
+                            <option value="1">Level 1</option>
+                            <option value="2">Level 2</option>
+                            <option value="3">Level 3</option>
+                            <option value="4">Level 4</option>
+                          </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Due Date:</label>
+                            <input type="date" name="due_date" class="form-control" id="due_date">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn-update btn btn-primary">Update</button>
+                    <!-- <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button> -->
+                </div>
+                </div>
+            </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="createHelpdeskModal" tabindex="-1" aria-labelledby="createHelpdeskModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createHelpdeskModalLabel">Add Ticket</h5>
+                    <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  <form id="formHelpdeskCreate">
+                    <div class="form-group">
+                        <label for="">Requested By:</label>
+                        <input type="hidden" id="user_id" name="user_id" value="" class="form-control">
+                        <input type="text" id="user_name" name="username" value="" class="form-control">
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="">Due Date:</label>
+                        <input type="date" id="due_date" name="due_date" value="" class="form-control">
+                    </div> -->
+                    <div class="form-group">
+                        <label for="">Detail:</label>
+                        <textarea name="detail" id="detail" class="form-control" cols="30" rows="3">-</textarea>
+                    </div>
+                    <!-- <div class="form-group">
+                      <label for="">Priority Level:</label>
+                      <select name="priority_id" class="form-control" id="priority_id">
+                        <option value="1">Level 1</option>
+                        <option value="2">Level 2</option>
+                        <option value="3">Level 3</option>
+                        <option value="4">Level 4</option>
+                      </select>
+                    </div> -->
+                    <div class="form-group">
+                      <label for="">Note:</label>
+                      <textarea name="note" id="note" class="form-control" cols="30" rows="3">-</textarea>
+                    </div>
+                </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn-save btn btn-primary">Save</button>
+                </div>
+                </div>
+            </div>
+            </div>
+            <!-- // -->
+
+            <!-- Modal -->
+            <div class="modal fade" id="priorityModal" tabindex="-1" aria-labelledby="priorityModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="priorityModalLabel">Set Priority Ticket</h5>
+                      <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                    <form id="formHelpdeskPriority">
+                      <div class="form-group">
+                          <label for="">Requested By:</label>
+                          <input type="hidden" id="ticket_id" name="ticket_id" value="" class="form-control">
+                          <input type="hidden" id="user_id_priority" name="user_id" value="" class="form-control">
+                          <input type="text" id="user_name_priority" name="username" value="" class="form-control">
+                      </div>
+                      <div class="form-group">
+                          <label for="">Due Date:</label>
+                          <input type="date" id="due_date_priority" name="due_date" value="" class="form-control">
+                      </div>
+                      <div class="form-group">
+                          <label for="">Detail:</label>
+                          <textarea name="detail" id="detail_priority" class="form-control" cols="30" rows="3">-</textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="">Priority Level:</label>
+                        <select name="priority_id" class="form-control" id="priority_id">
+                          <option value="1">Level 1</option>
+                          <option value="2">Level 2</option>
+                          <option value="3">Level 3</option>
+                          <option value="4">Level 4</option>
+                        </select>
+                      </div>
+                      <!-- <div class="form-group">
+                          <label for="">Notes:</label>
+                          <textarea name="notes" id="note" class="form-control" cols="30" rows="5">-</textarea>
+                      </div> -->
+                  </form>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="submit" class="btn-priority-save btn btn-primary">Save</button>
+                  </div>
+                  </div>
+              </div>
+              </div>
+              <!-- // -->
+
+              <!-- Modal -->
+            <div class="modal fade" id="logsModal" tabindex="-1" aria-labelledby="logsModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="logsModalLabel">Logs Ticket</h5>
+                      <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th scope="col">Note</th>
+                          <th scope="col">User</th>
+                          <th scope="col">Date</th>
+                        </tr>
+                      </thead>
+                      <tbody id="logs-table">
+                        
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="modal-footer">
+                      <!-- <button type="submit" class="btn-priority-save btn btn-primary">Save</button> -->
+                  </div>
+                  </div>
+              </div>
+              </div>
+              <!-- // -->
+
+            <!-- Modal -->
+            <div class="modal fade" id="notesModal" tabindex="-1" aria-labelledby="notesModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="notesModalLabel">Set Notes Ticket</h5>
+                      <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                    <form id="formHelpdeskNotes">
+                      <div class="form-group">
+                        <label for="">Requested By:</label>
+                        <input type="hidden" id="ticket_id_notes" name="user_id" value="" class="form-control">
+                        <input type="hidden" id="user_id_notes" name="user_id" value="" class="form-control">
+                        <input type="hidden" id="priority_id_notes" name="priority_id" value="" class="form-control">
+                        <input type="hidden" id="due_date_notes" name="due_date" value="" class="form-control">
+                        <input type="text" id="user_notes" name="" value="" class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label for="">Detail:</label>
+                        <textarea name="detail" id="detail_notes" class="form-control" cols="30" rows="2">-</textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="">Notes:</label>
+                        <textarea name="note" id="note_notes" class="form-control" cols="30" rows="2">-</textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="">Cause:</label>
+                        <textarea name="cause" id="cause_notes" class="form-control" cols="30" rows="2">-</textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="">Solution:</label>
+                        <textarea name="solution" id="solution_notes" class="form-control" cols="30" rows="2">-</textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="">Status:</label>
+                        <select name="status" id="status_notes" class="form-control" id="status">
+                          <option value="pending">Pending</option>
+                          <option value="processed">Processed</option>
+                        </select>
+                      </div>
+                  </form>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="submit" class="btn-notes-save btn btn-primary">Save</button>
+                  </div>
+                  </div>
+              </div>
+              </div>
+              <!-- // -->
+
+            <div class="row">
+              <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-9">
+                        <div class="d-flex align-items-center align-self-start">
+                          <h3 class="mb-0"><span id="processed_ticket">0</span> </h3>
+                          <p class="text-success ml-2 mb-0 font-weight-medium">--</p>
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div class="icon icon-box-success ">
+                          <span class="mdi mdi-account-edit icon-item"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <h6 class="text-muted font-weight-normal">Processed Ticket</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-9">
+                        <div class="d-flex align-items-center align-self-start">
+                          <h3 class="mb-0"><span id="pending_ticket">0</span> </h3>
+                          <p class="text-primary ml-2 mb-0 font-weight-medium">--</p>
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div class="icon icon-box-primary">
+                          <span class="mdi mdi-timer-sand icon-item"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <h6 class="text-muted font-weight-normal">Pending Ticket</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                <div class="card" id="active-user-card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-9">
+                        <div class="d-flex align-items-center align-self-start">
+                          <h3 class="mb-0"><span id="deleted_ticket">0</span> </h3>
+                          <p class="text-warning ml-2 mb-0 font-weight-medium">--</p>
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div class="icon icon-box-warning">
+                          <span class="mdi mdi-check-circle icon-item"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <h6 class="text-muted font-weight-normal">Closed Ticket</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                <div class="card" id="nonactive-user-card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-9">
+                        <div class="d-flex align-items-center align-self-start">
+                          <h3 class="mb-0"><span id="closed_ticket">0</span> </h3>
+                          <p class="text-danger ml-2 mb-0 font-weight-medium">--</p>
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div class="icon icon-box-danger ">
+                          <span class="mdi mdi-close-circle icon-item"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <h6 class="text-muted font-weight-normal">Deleted Ticket</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 grid-margin">
+                <div class="card">
+                  <div class="card-header">
+                    <!-- Button trigger modal -->
+                    <button type="button" id="btn-satker" class="btn btn-primary">
+                      Total Ticket : <b id="all_ticket"></b>
+                    </button>
+                    <button type="button" id="btn-satker" class="btn btn-satker btn-success btn-create ml-2" data-toggle="modal" data-target="#createHelpdeskModal">
+                      Add Ticket
+                    </button>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-12 table-responsive">
+                      <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                              <th>Request By</th>
+                              <th>Priority Level</th>
+                              <th>Subject</th>
+                              <th>Status</th>
+                              <th>Due Date</th>
+                              <th>Created Date</th>
+                              <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                      </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:partials/_footer.html -->
+          <footer class="footer">
+            <div class="d-sm-flex justify-content-center justify-content-sm-between">
+              <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © PT SOLUSI TIGA BERSAMA 2024</span>
+              <!-- <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin templates</a> from Bootstrapdash.com</span> -->
+            </div>
+          </footer>
+          <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="assets/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="assets/vendors/chart.js/Chart.min.js"></script>
+    <script src="assets/vendors/progressbar.js/progressbar.min.js"></script>
+    <script src="assets/vendors/jvectormap/jquery-jvectormap.min.js"></script>
+    <script src="assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="assets/vendors/owl-carousel-2/owl.carousel.min.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="assets/js/off-canvas.js"></script>
+    <script src="assets/js/hoverable-collapse.js"></script>
+    <script src="assets/js/misc.js"></script>
+    <script src="assets/js/settings.js"></script>
+    <script src="assets/js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="assets/js/dashboard.js"></script>
+    <!-- <script src="https://code.highcharts.com/highcharts.js"></script> -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <!-- <script src="https://code.highcharts.com/modules/series-label.js"></script> -->
+    <!-- <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script> -->
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script> -->
+    <script src="https://unpkg.com/vue@3.4.15/dist/vue.global.prod.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            message: 'Hello, Vue.js!'
+          };
+        }
+      });
+
+      // Mount the Vue instance to the specified HTML element
+      app.mount('#app');
+    </script>
+    <script>
+      $(document).ready(function () {
+        // const API_URL = 'http://203.175.10.32:86/api'
+        // const API_URL = 'http://103.127.133.99:86/api'
+        // const API_URL = 'http://localhost:3000/api'
+        const API_URL = 'http://103.127.133.99:86/api'
+
+        let username = localStorage.getItem('username')
+        let name = localStorage.getItem('name')
+        let role = localStorage.getItem('role')
+        let user_id = localStorage.getItem('user_id')
+
+        if (role == 'super admin') {
+          // $("#btn-satker").hide()
+        }
+
+        if (role == 'admin') {
+          // btn
+          // $("#btn-satker").hide()
+        }
+
+        if (role == 'teknisi') {
+          $("#div-router-list").hide()
+          $("#div-dashboard").show()
+          $("#div-router").hide()
+          $("#div-analytics").show()
+          $("#div-manajemen-user").hide()
+          $("#div-helpdesk").show()
+
+          // btn
+          $("#btn-satker").hide()
+        }
+
+        if (role == 'satker') {
+          $("#div-router-list").hide()
+          $("#div-dashboard").show()
+          $("#div-router").hide()
+          $("#div-analytics").show()
+          $("#div-manajemen-user").hide()
+          $("#div-helpdesk").show()
+
+          // form
+          $("#form-admin").hide()
+          $("#form-teknisi").hide()
+          $("#form-satker").show()
+
+          // btn
+          $("#btn-satker").show()
+        }
+
+        $("#username").html(name)
+        $("#username_side").html(name)
+        $("#role").html(role)
+
+        function formatDate(date_param) {
+          // Create a Date object from the input string
+          const date = new Date(date_param);
+
+          // Get the day, month, and year
+          const day = date.getDate();
+          const month = date.getMonth() + 1; // Months are zero-based
+          const year = date.getFullYear();
+
+          // Get the hours, minutes, and seconds
+          const hours = date.getHours();
+          const minutes = date.getMinutes();
+          const seconds = date.getSeconds();
+
+          const formattedDateTime = `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
+
+          return formattedDateTime
+        }
+
+        /* Get Helpdesk */
+        $.ajax({
+          type: "GET",
+          url: API_URL+"/ticket",
+          dataType: "JSON",
+          success: function (response) {
+            let data = response.data
+            console.log(data);
+            // $("#total_ticket").html(data.length)
+
+            // Initialize counters
+            let pendingCount = 0;
+            let closedCount = 0;
+            let deletedCount = 0;
+
+            // Iterate through the data
+            // data.forEach(ticket => {
+            //     switch (ticket.status) {
+            //         case "pending":
+            //             pendingCount++;
+            //             break;
+            //         case "closed":
+            //             closedCount++;
+            //             break;
+            //         case "deleted":
+            //             deletedCount++;
+            //             break;
+            //     }
+            // });
+
+            // $("#pending_ticket").html(pendingCount)
+            // $("#deleted_ticket").html(closedCount)
+            // $("#closed_ticket").html(deletedCount)
+
+            var table = $('#datatable').DataTable();
+
+            // Add data to the table
+            for (var i = 0; i < data.length; i++) {
+                var rowData = data[i];
+
+                var editButton = "";
+                var deleteButton = ""
+                let logsButton = '<button class="btn-logs btn btn-danger" data-id="' + rowData.id + '">Logs</button>';
+
+                if (role == "super admin"
+                || role == "admin") {
+                  editButton = '<button class="btn-edit btn btn-primary" data-id="' + rowData.id + '">Edit</button>';
+                  deleteButton = '<button class="btn-delete btn btn-danger" data-id="' + rowData.id + '">Delete</button>';
+                } else {
+                  editButton = '<button class="btn-notes btn btn-primary" data-id="' + rowData.id + '">Notes</button>';
+                }
+                
+                var priority_level
+
+                if (rowData.priority == "Level 4") {
+                  priority_level = "<span class='badge badge-primary'>"+rowData.priority+"</span>"
+                }
+
+                if (rowData.priority == "Level 3") {
+                  priority_level = "<span class='badge badge-success'>"+rowData.priority+"</span>"
+                }
+
+                if (rowData.priority == "Level 2") {
+                  priority_level = "<span class='badge badge-warning'>"+rowData.priority+"</span>"
+                }
+
+                if (rowData.priority == "Level 1") {
+                  priority_level = "<span class='badge badge-danger'>"+rowData.priority+"</span>"
+                }
+
+                if (rowData.priority == null) {
+                  priority_level = "<span class='badge badge-danger'>Pending</span>"
+                }
+
+                table.row.add([
+                    rowData.user,
+                    priority_level,
+                    rowData.detail,
+                    rowData.status,
+                    rowData.due_date ?? "-",
+                    formatDate(rowData.created_at),
+                    editButton + ' ' + logsButton + ' ' + deleteButton
+                ]).draw();
+            }
+          }
+        });
+
+        $(document).on("click", ".btn-create", function(e) {
+          $("#user_id").val(user_id)
+          $("#user_name").val(username)
+        })
+
+        $.ajax({
+          type: "GET",
+          url: API_URL+"/ticket/count/pending",
+          dataType: "JSON",
+          success: function (response) {
+            $("#pending_ticket").html(response.data.ticket)
+          }
+        });
+
+        $.ajax({
+          type: "GET",
+          url: API_URL+"/ticket/count/processed",
+          dataType: "JSON",
+          success: function (response) {
+            $("#processed_ticket").html(response.data.ticket)
+
+          }
+        });
+
+        $.ajax({
+          type: "GET",
+          url: API_URL+"/ticket/count/closed",
+          dataType: "JSON",
+          success: function (response) {
+            $("#closed_ticket").html(response.data.ticket)
+          }
+        });
+
+        $.ajax({
+          type: "GET",
+          url: API_URL+"/ticket/count/all",
+          dataType: "JSON",
+          success: function (response) {
+            $("#all_ticket").html(response.data.ticket)
+          }
+        });
+
+        $.ajax({
+          type: "GET",
+          url: API_URL+"/ticket/count/deleted",
+          dataType: "JSON",
+          success: function (response) {
+            $("#deleted_ticket").html(response.data.ticket)
+          }
+        });
+
+        $(document).on("click", ".btn-save", function(e) {
+          $.ajax({
+            type: "POST",
+            url: API_URL+"/ticket",
+            data: $("#formHelpdeskCreate").serialize(),
+            dataType: "JSON",
+            success: function (response) {
+              swal({
+                title: "Good job!",
+                text: `Data berhasil ditambah!`,
+                icon: "success",
+                button: "Aww yiss!",
+              });
+
+              setTimeout(() => {
+                document.location.href = "/helpdesk.html"
+              }, 1500);
+            }
+          });
+        })
+
+        $(document).on("click", ".btn-priority", function(e) {
+          let id = $(this).data('id')
+
+          $.ajax({
+            type: "GET",
+            url: API_URL+"/dashboard/detail-helpdesk/"+id,
+            dataType: "JSON",
+            success: function (response) {
+              let data = response.data[0]
+              $("#ticket_id").val(data.id)
+              $("#user_id_priority").val(data.request_by)
+              $("#user_name_priority").val(data.name)
+              $("#due_date_priority").val(data.due_date)
+              $("#detail_priority").html(data.description)
+              $("#priorityModal").modal('show')
+            }
+          });
+        })
+
+        $(document).on("click", ".btn-priority-save", function(e) {
+          let ticket_id = $("#ticket_id").val()
+
+          $.ajax({
+            type: "POST",
+            url: API_URL+"/dashboard/set-helpdesk-priority/"+ticket_id,
+            data: $("#formHelpdeskPriority").serialize(),
+            dataType: "JSON",
+            success: function (response) {
+              swal({
+                title: "Good job!",
+                text: `Data berhasil ditambah!`,
+                icon: "success",
+                button: "Aww yiss!",
+              });
+
+              setTimeout(() => {
+                document.location.href = "/helpdesk.html"
+              }, 1500);
+            }
+          });
+        })
+
+        //
+        $(document).on("click", ".btn-notes", function(e) {
+          let id = $(this).data('id')
+
+          $.ajax({
+            type: "GET",
+            url: API_URL+"/ticket/"+id,
+            dataType: "JSON",
+            success: function (response) {
+              let data = response.data.ticket
+
+              $("#ticket_id_notes").val(data.ticket_id)
+              $("#user_notes").val(data.user)
+              $("#detail_notes").val(data.detail)
+              $("#status_notes").val(data.status)
+              $("#user_id_notes").val(user_id)
+              $("#priority_id_notes").val(data.priority_id)
+              $("#due_date_notes").val(data.due_date)
+
+              $("#notesModal").modal("show")
+            }
+          });
+        })
+
+        $(document).on("click", ".btn-notes-save", function(e) {
+          let ticket_id = $("#ticket_id_notes").val()
+
+          $.ajax({
+            type: "POST",
+            url: API_URL+"/dashboard/reply-helpdesk/"+ticket_id,
+            data: $("#formHelpdeskNotes").serialize(),
+            dataType: "JSON",
+            success: function (response) {
+              swal({
+                title: "Good job!",
+                text: `Data berhasil ditambah!`,
+                icon: "success",
+                button: "Aww yiss!",
+              });
+
+              setTimeout(() => {
+                document.location.href = "/helpdesk.html"
+              }, 1500);
+            }
+          });
+        })
+        //
+
+        $(document).on("click", ".btn-logs", function(e) {
+          let id = $(this).data('id')
+
+          $.ajax({
+            type: "GET",
+            url: API_URL+"/ticket/"+id,
+            dataType: "JSON",
+            success: function (response) {
+              let data = response.data.logs
+
+              let logsTable = ""
+
+              data.forEach((value, index) => {
+                logsTable += `<tr>
+                  <th>${value.note}</th>
+                  <td>${value.user}</td>
+                  <td>${value.created_at}</td>
+                </tr>`  
+              })
+
+              $("#logs-table").html(logsTable)
+              // let note = response.note_by[0]
+
+              // $("#logs-by").html(data.username)
+              // $("#logs-created-at").html(data.created_at)
+              // $("#logs-due-date").html(data.due_date)
+
+              // let notes = ''
+              // let done_at = ''
+
+              // if (data.notes != null && note.name != null && data.done_at != null) {
+              //   notes = `<p>${data.notes}</p><p>By : ${note.name}</p>`
+              //   done_at = data.done_at
+              // }
+
+              // $("#logs-notes").html(notes)
+              // $("#logs-done-at").html(done_at)
+              $("#logsModal").modal("show")
+            }
+          });
+        })
+
+        $(document).on("click", ".btn-edit", function(e) {
+          let id = $(this).data('id')
+
+          $.ajax({
+            type: "GET",
+            url: API_URL+"/ticket/"+id,
+            dataType: "JSON",
+            success: function (response) {
+              let ticket = response.data.ticket
+              let logs = response.data.logs
+              let newestLog = null
+              if (logs.length > 0) {
+                  // Sort the logs array based on the 'created_at' timestamp in descending order
+                  logs.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+                  
+                  // Get the newest log (first element after sorting)
+                  newestLog = logs[0];
+                  
+                  console.log(newestLog);
+              } else {
+                  console.log("No log entries found.");
+              }
+
+              let str = ticket.priority
+              let priority = parseInt(str.match(/\d+/)[0]);
+              $("#detail_edit").html(ticket.detail)
+              $("#note_edit").html(newestLog.note)
+              $("#note_edit").html(newestLog.note)
+              $("#due_date").val(ticket.due_date)
+              // console.log(newestLog);
+              $("#id_edit").val(ticket.id)
+              $("#user_id_edit").val(localStorage.getItem('user_id'))
+              $("#request_by").val(ticket.user)
+              $("#priority_id").val(priority)
+              $("#helpdeskModal").modal("show")
+            }
+          });
+        })
+
+        $(document).on("click", ".btn-update", function(e) {
+          e.preventDefault()
+          let id = $("#id_edit").val()
+
+          $.ajax({
+            type: "POST",
+            url: API_URL+"/ticket/reply/"+id,
+            data: $("#formHelpdeskUpdate").serialize(),
+            dataType: "JSON",
+            success: function (response) {
+              swal({
+                title: "Good job!",
+                text: `Data berhasil ditambah!`,
+                icon: "success",
+                button: "Aww yiss!",
+              });
+
+              setTimeout(() => {
+                document.location.href = "/helpdesk.html"
+              }, 1500);
+            }
+          });
+        })
+
+        $(document).on("click", ".btn-delete", function(e) {
+          let id = $(this).data('id')
+
+          swal({
+            title: "Are you sure?",
+            text: `Apakah yakin Hapus data ini ?`,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              $.ajax({
+                type: "DELETE",
+                url: API_URL+"/ticket/"+id,
+                data: {
+                  code: id
+                },
+                dataType: "JSON",
+                success: function (response) {
+                  swal({
+                    title: "Good job!",
+                    text: `Data berhasil dihapus!`,
+                    icon: "success",
+                    button: "Aww yiss!",
+                  });
+
+                  setTimeout(() => {
+                    document.location.href = "/helpdesk.html"
+                  }, 1500);
+                }
+              });
+            } else {
+              swal("Aksi dibatalkan!");
+            }
+          });
+        })
+      });
+    </script>
+  </body>
+</html>

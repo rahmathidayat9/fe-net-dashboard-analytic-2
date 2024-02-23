@@ -1,0 +1,1080 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>DASHBOARD ANALYTICS</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap4.min.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="assets/images/favicon.png" />
+    <style>
+      .scroll-container {
+        max-height: 700px; /* Set the maximum height for the container */
+        overflow-y: auto; /* Enable vertical scrolling when content overflows */
+      }
+    </style>
+  </head>
+  <body class="sidebar-icon-only">
+    <div id="app" class="container-scroller">
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+          <!-- <a class="sidebar-brand brand-logo" href="index.html"><img src="assets/images/logo.svg" alt="logo" /></a> -->
+          <!-- <a class="sidebar-brand brand-logo-mini" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo" /></a> -->
+        </div>
+        <ul class="nav">
+          <li class="nav-item profile">
+            <div class="profile-desc">
+              <div class="profile-pic">
+                <div class="count-indicator">
+                  <img class="img-xs rounded-circle " src="assets/images/user.png" alt="">
+                  <span class="count bg-success"></span>
+                </div>
+                <div class="profile-name">
+                  <h5 class="mb-0 font-weight-normal"><span id="username_side"></span></h5>
+                  <span id="role"></span>
+                </div>
+              </div>
+              <!-- <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
+              <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
+                <a href="#" class="dropdown-item preview-item">
+                  <div class="preview-thumbnail">
+                    <div class="preview-icon bg-dark rounded-circle">
+                      <i class="mdi mdi-settings text-primary"></i>
+                    </div>
+                  </div>
+                  <div class="preview-item-content">
+                    <p class="preview-subject ellipsis mb-1 text-small">Logout</p>
+                  </div>
+                </a>
+              </div> -->
+            </div>
+          </li>
+          <li class="nav-item nav-category">
+            <span class="nav-link">Navigation</span>
+          </li>
+          <li class="nav-item menu-items" id="div-dashboard">
+            <a class="nav-link" href="home.html">
+              <span class="menu-icon">
+                <i class="mdi mdi-speedometer"></i>
+              </span>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items" id="div-router">
+            <a class="nav-link" href="router.html">
+              <span class="menu-icon">
+                <i class="mdi mdi-router-wireless-settings"></i>
+              </span>
+              <span class="menu-title">Manajemen Router</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items" id="div-analytics">
+            <a class="nav-link" href="analytics.html">
+              <span class="menu-icon">
+                <i class="mdi mdi-file-document-box"></i>
+              </span>
+              <span class="menu-title">Analytics</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items" id="div-helpdesk">
+            <a class="nav-link" href="helpdesk.html">
+              <span class="menu-icon">
+                <i class="mdi mdi-account-edit"></i>
+              </span>
+              <span class="menu-title">Helpdesk</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items" id="div-manajemen-user">
+            <a class="nav-link" href="users.html">
+              <span class="menu-icon">
+                <i class="mdi mdi-account-group"></i>
+              </span>
+              <span class="menu-title">Manajemen User</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_navbar.html -->
+        <nav class="navbar p-0 fixed-top d-flex flex-row">
+          <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
+            <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo" /></a>
+          </div>
+          <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+            <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+              <span class="mdi mdi-menu"></span>
+            </button>
+            <ul class="navbar-nav navbar-nav-right">
+              <li class="nav-item dropdown">
+                <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
+                  <div class="navbar-profile">
+                    <img class="img-xs rounded-circle" src="assets/images/user.png" alt="">
+                    <p class="mb-0 d-none d-sm-block navbar-profile-name"><span id="username"></span></p>
+                    <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                  </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
+                  <!-- <h6 class="p-3 mb-0">Profile</h6> -->
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item" href="javascript:void(0)">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-access-point-network text-success"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Active Router <br>
+                      <span class="text-small" id="active-router"></span></p>
+                    </div>
+                  </a>
+                  <a class="dropdown-item preview-item" id="router-list" href="javascript:void(0)">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-laptop text-primary"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">List Router</p>
+                    </div>
+                  </a>
+                  <a class="dropdown-item preview-item" href="/">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-logout text-danger"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Log out</p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <p class="p-3 mb-0 text-center" id="hour">
+                    
+                  </p>
+                </div>
+              </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+              <span class="mdi mdi-format-line-spacing"></span>
+            </button>
+          </div>
+        </nav>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="row">
+              <!-- // -->
+              <!-- Modal -->
+              <div class="modal fade" id="nonactiveUserModal" tabindex="-1" aria-labelledby="nonactiveUserModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="nonactiveUserModalLabel">Nonactive Users</h5>
+                      <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <table id="nonactive-table" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                              <th>Name</th>
+                              <th>IP Address</th>
+                              <th>Last Seen</th>
+                              <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Modal -->
+              <div class="modal fade" id="activeUserModal" tabindex="-1" aria-labelledby="activeUserModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="activeUserModalLabel">Active Users</h5>
+                      <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <table id="active-table" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                              <th>Name</th>
+                              <th>IP Address</th>
+                              <th>Last Seen</th>
+                              <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- // -->
+
+              <!-- Modal -->
+              <div class="modal fade" id="routerModal" tabindex="-1" aria-labelledby="routerModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="routerModalLabel">Active Users</h5>
+                      <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <table id="router-table" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                              <th>Name</th>
+                              <th>Host</th>
+                              <th>Uuid</th>
+                              <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- // -->
+              <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-9">
+                        <div class="d-flex align-items-center align-self-start">
+                          <h3 class="mb-0"><span id="upload">0</span></h3>
+                          <p class="text-success ml-2 mb-0 font-weight-medium">--</p>
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div class="icon icon-box-success ">
+                          <span class="mdi mdi-download icon-item"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <h6 class="text-muted font-weight-normal">Download</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-9">
+                        <div class="d-flex align-items-center align-self-start">
+                          <h3 class="mb-0"><span id="download">0</span></h3>
+                          <p class="text-primary ml-2 mb-0 font-weight-medium">--</p>
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div class="icon icon-box-primary">
+                          <span class="mdi mdi-upload icon-item"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <h6 class="text-muted font-weight-normal">Upload</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                <div class="card" style="cursor: pointer;" id="active-user-card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-9">
+                        <div class="d-flex align-items-center align-self-start">
+                          <h3 class="mb-0"><span id="active-users">0</span> User</h3>
+                          <p class="text-warning ml-2 mb-0 font-weight-medium">--</p>
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div class="icon icon-box-warning">
+                          <span class="mdi mdi-account-group icon-item"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <h6 class="text-muted font-weight-normal">Active Users</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+                <div class="card" style="cursor: pointer;" id="nonactive-user-card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-9">
+                        <div class="d-flex align-items-center align-self-start">
+                          <h3 class="mb-0"><span id="nonactive-users">0</span> User</h3>
+                          <p class="text-danger ml-2 mb-0 font-weight-medium">--</p>
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div class="icon icon-box-danger ">
+                          <span class="mdi mdi-account-group icon-item"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <h6 class="text-muted font-weight-normal">Nonactive Users</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 grid-margin">
+                <div class="scroll-container" id="cardContainer">
+                </div>
+              </div>
+              <div class="col-md-8 grid-margin">
+                <div class="card mb-3">
+                  <div id="container"></div>
+                </div>
+
+                <div class="card">
+                  <div class="card-header bg-primary">Users Detail</div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-12">
+                      <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                            <tr>
+                              <th>Name</th>
+                              <th>IP Address</th>
+                              <th>Last Seen</th>
+                              <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                      </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <!-- <h5>Revenue</h5> -->
+                    <div class="row">
+                      <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                          <h2 class="mb-0">RAM</h2>
+                          <p class="text-success ml-4 mb-0 font-weight-medium"><h3 id="ram">0</h3></p>
+                        </div>
+                        <!-- <h6 class="text-muted font-weight-normal">11.38% Since last month</h6> -->
+                      </div>
+                      <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <i class="icon-lg mdi mdi-codepen text-primary ml-auto"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <!-- <h5>Sales</h5> -->
+                    <div class="row">
+                      <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                          <h2 class="mb-0">CPU</h2>
+                          <p class="text-success ml-4 mb-0 font-weight-medium"><h3 id="cpu">0</h3></p>
+                        </div>
+                        <!-- <h6 class="text-muted font-weight-normal"> 9.61% Since last month</h6> -->
+                      </div>
+                      <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <i class="icon-lg mdi mdi-memory text-danger ml-auto"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <!-- <h5>Purchase</h5> -->
+                    <div class="row">
+                      <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                          <h2 class="mb-0">HDD</h2>
+                          <p class="text-danger ml-4 mb-0 font-weight-medium"><h3 id="hdd">0</h3> </p>
+                        </div>
+                        <!-- <h6 class="text-muted font-weight-normal">2.27% Since last month</h6> -->
+                      </div>
+                      <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <i class="icon-lg mdi mdi-harddisk text-success ml-auto"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" id="chartId">
+
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:partials/_footer.html -->
+          <footer class="footer">
+            <div class="d-sm-flex justify-content-center justify-content-sm-between">
+              <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © PT SOLUSI TIGA BERSAMA 2024</span>
+              <!-- <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin templates</a> from Bootstrapdash.com</span> -->
+            </div>
+          </footer>
+          <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="assets/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <!-- <script src="assets/js/off-canvas.js"></script> -->
+    <script src="assets/js/hoverable-collapse.js"></script>
+    <script src="assets/js/misc.js"></script>
+    <!-- <script src="assets/js/settings.js"></script> -->
+    <!-- <script src="assets/js/todolist.js"></script> -->
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="assets/js/dashboard.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="https://unpkg.com/vue@3.4.15/dist/vue.global.prod.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
+    <script> 
+    console['error'] = function(){}
+      $(document).ready(function () {
+        // const API_URL = 'http://203.175.10.32:86/api'
+        // const socket = io('http://203.175.10.32:86');
+
+        // const API_URL = 'http://103.127.133.99:86/api'
+        // const socket = io('http://103.127.133.99:86');
+        
+        // const API_URL = 'http://localhost:3000/api'
+        // const socket = io('http://localhost:3000');
+        const API_URL = 'http://103.127.133.99:86/api'
+        const socket = io('http://103.127.133.99:86');
+
+
+        let username = localStorage.getItem('username')
+        let name = localStorage.getItem('name')
+        let role = localStorage.getItem('role')
+        let user_id = localStorage.getItem('user_id')
+
+        if (role == 'super admin') {
+
+        }
+
+        if (role == 'admin') {
+        
+        }
+
+        if (role == 'teknisi') {
+          $("#div-router-list").hide()
+          $("#div-dashboard").show()
+          $("#div-router").hide()
+          $("#div-analytics").show()
+          $("#div-manajemen-user").hide()
+          $("#div-helpdesk").show()
+        }
+
+        if (role == 'satker') {
+          $("#div-router-list").hide()
+          $("#div-dashboard").show()
+          $("#div-router").hide()
+          $("#div-analytics").show()
+          $("#div-manajemen-user").hide()
+          $("#div-helpdesk").show()
+        }
+
+        $("#username").html(name)
+        $("#username_side").html(name)
+        $("#role").html(role)
+
+        /* Get Router */
+        $.ajax({
+          type: "GET",
+          url: API_URL+"/dashboard/get-router",
+          dataType: "JSON",
+          success: function (response) {
+            let data = response.data
+            
+            var storedValue = localStorage.getItem('router_id');
+            var uuid = null
+            var name = null
+
+            if (storedValue == null) {
+              uuid = data.items[0].uuid
+              name = data.items[0].name
+              localStorage.setItem('router_id', uuid); 
+              localStorage.setItem('router_name', name);  
+            } else {
+              uuid = localStorage.getItem('router_id');
+              name = localStorage.getItem('router_name');
+            }
+            console.log(localStorage.getItem('router_id'));
+
+            getSystem(uuid)
+            getDhcpServer(uuid)
+            getInterfaceSession(uuid)
+
+            let dataItems = data.items
+
+            var table = $('#router-table').DataTable({
+              pageLength: 5,
+            });
+
+            // Add data to the table
+            for (var i = 0; i < dataItems.length; i++) {
+                var rowData = dataItems[i];
+                var editButton = ''
+                // if (name == rowData.name) {
+                  editButton += '<button class="btn-edit btn btn-primary" id="router-data" data-name="'+rowData.name+'" data-router="'+rowData.uuid+'" data-id="' + rowData.uuid + '">Set Router</button>';
+                // } else {
+                  // editButton += '<button class="btn-edit btn btn-success" data-id="' + rowData.uuid + '">Activate</button>';
+                // }
+
+                table.row.add([
+                    rowData.name,
+                    rowData.ipaddress,
+                    rowData.uuid,
+                    editButton
+                ]).draw();
+            }
+
+            $("#active-router").html(`(${name})`)
+          }
+        });
+
+        $(document).on("click", "#router-list", function(e) {
+          $("#routerModal").modal("show")
+        })
+
+        function getSystem(uuid) {
+          $.ajax({
+            type: "GET",
+            url: API_URL+"/dashboard/get-system",
+            data: {
+              "uuid" : uuid,
+            },
+            dataType: "JSON",
+            success: function (response) {
+              let data = response
+
+              $("#ram").html(`${data["ram-usage"]}%`)
+              $("#hdd").html(`${data["hdd-usage"]}%`)
+              $("#cpu").html(`${data["cpu-load"]}%`)
+            }
+          });
+        }
+
+        // Function to parse duration strings like "3d4h54m15s" into seconds
+        function parseDuration(durationString) {
+          var durationArray = durationString.match(/\d+[dhms]/g) || [];
+          var seconds = 0;
+
+          durationArray.forEach(function (duration) {
+            var unit = duration.charAt(duration.length - 1);
+            var value = parseInt(duration, 10);
+
+            switch (unit) {
+              case 'd':
+                seconds += value * 24 * 60 * 60;
+                break;
+              case 'h':
+                seconds += value * 60 * 60;
+                break;
+              case 'm':
+                seconds += value * 60;
+                break;
+              case 's':
+                seconds += value;
+                break;
+            }
+          });
+
+          return seconds;
+        }
+
+        var table = $('#datatable').DataTable();
+        var table2 = $('#nonactive-table').DataTable();
+        var table3 = $('#active-table').DataTable();
+
+        function getDhcpServer(uuid) {
+          $.ajax({
+            type: "GET",
+            url: API_URL+"/dashboard/get-dhcp-server",
+            data: {
+              "uuid" : uuid,
+            },
+            dataType: "JSON",
+            success: function (response) {
+              let data = response
+              
+              data.massage.forEach(function(entry) {
+                // Convert "last-seen" to seconds for easier comparison
+                var lastSeenSeconds = parseDuration(entry['last-seen']);
+                entry['host-name'] = entry['host-name'] || 'no name';
+                // Add "status" property based on conditions
+                entry['status'] = lastSeenSeconds > 1800 ? 'nonactive' : 'active';
+              });
+
+              // Count the number of "active" and "nonactive" entries
+              // Separate active and nonactive users
+              var activeUsers = data.massage.filter(entry => entry['status'] === 'active');
+              var nonactiveUsers = data.massage.filter(entry => entry['status'] === 'nonactive');
+
+              // Count the number of "active" and "nonactive" entries
+              var activeCount = activeUsers.length;
+              var nonactiveCount = nonactiveUsers.length;
+
+              $("#active-users").html(activeCount)
+              $("#nonactive-users").html(nonactiveCount)
+
+              table.destroy();
+              table2.destroy();
+              table3.destroy();
+
+              table = $('#datatable').DataTable({
+                data: data.massage,
+                pageLength: 5,
+                columns: [
+                  { data: 'host-name', title: 'Host' },
+                  { data: 'address', title: 'IP Address' },
+                  { data: 'last-seen', title: 'Last Update' },
+                  { data: 'status', title: 'Status' },
+                ]
+              });
+
+              table2 = $('#nonactive-table').DataTable({
+                  data: nonactiveUsers,
+                  pageLength: 5,
+                  columns: [
+                      { data: 'host-name', title: 'Host' },
+                      { data: 'address', title: 'IP Address' },
+                      { data: 'last-seen', title: 'Last Update' },
+                      { data: 'status', title: 'Status' },
+                  ]
+              });
+
+              table3 = $('#active-table').DataTable({
+                  data: activeUsers,
+                  pageLength: 5,
+                  columns: [
+                      { data: 'host-name', title: 'Host' },
+                      { data: 'address', title: 'IP Address' },
+                      { data: 'last-seen', title: 'Last Update' },
+                      { data: 'status', title: 'Status' },
+                  ]
+              });
+            }
+          });
+        }
+
+        function sendTelegram(interface, speed) {
+          $.ajax({
+            type: "POST",
+            url: API_URL+"/dashboard/send-telegram",
+            data: {
+              interface: interface,
+              speed: speed,
+            },
+            dataType: "JSON",
+            success: function (response) {
+              console.log(response);
+            }
+          });
+        }
+
+        function getInterfaceSession(uuid) {
+          $.ajax({
+            type: "GET",
+            url: API_URL+"/dashboard/get-interfaces?uuid="+uuid,
+            dataType: "JSON",
+            success: function (response1) {
+              $.ajax({
+                type: "GET",
+                url: API_URL+"/dashboard/start",
+                success: function (response2) {
+                  //
+                  let data = response1
+                  let dataResponse2 = response2
+                  localStorage.setItem('dataInterface', JSON.stringify(data));
+                  // localStorage.setItem('defaultInterface', dataResponse2.data.internet);
+                  localStorage.setItem('defaultInterface', 'ether1');
+                  let dataInterface = localStorage.getItem('dataInterface');
+                  let interfaces = localStorage.getItem('dataInterface');
+                  
+                  if (dataInterface) {
+                    dataInterface = JSON.parse(localStorage.getItem('dataInterface'));
+                    interfaces = JSON.parse(localStorage.getItem('dataInterface'));
+
+                    let dataHtml = ""
+                    interfaces.forEach((value, index) => {
+                      dataHtml += `<div class="card mb-2">
+                        <div id="${value}"></div>
+                      </div>`
+                    })
+                    $("#cardContainer").html(dataHtml)
+
+                    dataInterface.forEach((value, index) => {
+                      let chartOptions1 = {
+                        credits: {
+                          enabled: false
+                        },
+                        legend: {
+                          itemStyle: {
+                            color: 'white',
+                          },
+                        },
+                        chart: {
+                          type: 'area',
+                          backgroundColor: 'rgba(0, 0, 0, 0)',
+                          // width: 250,
+                          height: 200,
+                        },
+                        title: {
+                          text: value,
+                          style: {
+                            color: 'white',
+                            fontSize: '14px',
+                          }
+                        },  
+                        xAxis: {
+                          categories: [],
+                          labels:
+                          {
+                            enabled: false
+                          }
+                        },
+                        yAxis: {
+                          title: {
+                            text: '',
+                            style: {
+                              color: 'white'
+                            }
+                          },
+                          labels: {
+                            style: {
+                              color: 'white'
+                            }
+                          },
+                        },
+                        plotOptions: {
+                          area: {
+                            fillOpacity: 0.5,
+                            marker: {
+                              enabled: false,
+                            },
+                          },
+                        },
+                        series: [
+                          {
+                            name: 'Upload',
+                            data: [],
+                            color: '#0766AD',
+                            fillOpacity: 0.5,
+                          },
+                          {
+                            name: 'Download',
+                            data: [],
+                            color: '#BE3144',
+                            fillOpacity: 0.5,
+                          }
+                        ]
+                      }
+
+                      let initChart1 = Highcharts.chart(value, chartOptions1);
+
+                      socket.on(value, function (data) {
+                        const uploadData = formatBytes(data.upload);
+                        const downloadData = formatBytes(data.download);
+
+                        let uploadInterval
+                        let downloadInterval
+
+                        if (uploadData < 10) {
+                          uploadInterval = setInterval(() => {
+                            // sendTelegram(value, uploadData)
+                          }, 5000);
+                        } else {
+                          clearInterval(uploadInterval)
+                        }
+
+                        if (downloadData < 10) {
+                          downloadInterval = setInterval(() => {
+                            // sendTelegram(value, downloadData)
+                          }, 5000);
+                        } else {
+                          clearInterval(downloadInterval)
+                        }
+                        
+                        // Format data with two decimal places
+                        chartOptions1.series[0].data.push(uploadData);
+                        chartOptions1.series[1].data.push(downloadData);
+
+                        if (chartOptions1.series[0].data.length > 5) {
+                          chartOptions1.series[0].data.shift();
+                          chartOptions1.series[1].data.shift();
+                        }
+
+                        chartOptions1.xAxis.categories.push(new Date().toLocaleTimeString());
+                        if (chartOptions1.xAxis.categories.length > 5) {
+                          chartOptions1.xAxis.categories.shift();
+                        }
+
+                        if (initChart1) {
+                          initChart1.series[0].setData(chartOptions1.series[0].data, false);
+                          initChart1.series[1].setData(chartOptions1.series[1].data, false);
+                          initChart1.xAxis[0].setCategories(chartOptions1.xAxis.categories, false);
+                          initChart1.redraw();
+                        }
+                      })
+                    })
+                  }
+                  //
+                }
+              });
+            }
+          });
+        }
+
+        function formatBytesInternet(bytes) {
+          if (bytes < 1024) {
+              return bytes + ' Bps';
+          } else if (bytes < 1024 * 1024) {
+              return (bytes / 1024).toFixed(2) + ' Kbps';
+          } else {
+              return (bytes / (1024 * 1024)).toFixed(2) + ' Mbps';
+          }
+        }
+
+        function formatBytes(bytes) {
+          let kilobyte = bytes / 1024;
+          return parseInt(kilobyte)
+        }
+
+        let defaultInterface = localStorage.getItem('defaultInterface');
+        socket.on(defaultInterface, function (data) {
+          const uploadData = formatBytes(data.upload);
+          const downloadData = formatBytes(data.download);
+          updateData(uploadData, downloadData);
+
+          let upData = formatBytesInternet(data.upload)
+          let downData = formatBytesInternet(data.download)
+          $("#download").html(upData)
+          $("#upload").html(downData)
+        })
+
+        $(document).on("click", "#router-data", function(e) {
+          let uuid = $(this).data('router')
+          let name = $(this).data('name')
+          
+          // get localstorage
+          localStorage.removeItem('router_id');
+          localStorage.setItem('router_id', uuid);
+
+          localStorage.removeItem('router_name');
+          localStorage.setItem('router_name', name);
+
+          uuid = localStorage.getItem('router_id');
+          name = localStorage.getItem('router_name');
+
+          swal({
+            title: "Are you sure?",
+            text: `Apakah yakin router ${name} ?`,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              swal({
+                title: "Good job!",
+                text: `Berhasil pindah ke router ${name}!`,
+                icon: "success",
+                button: "Aww yiss!",
+              });
+
+              getSystem(uuid)
+              getDhcpServer(uuid)
+              getInterfaceSession(uuid)
+
+              $("#routerModal").modal("hide")
+
+
+              $("#active-router").html(`(${name})`)
+            } else {
+              swal("Aksi dibatalkan!");
+            }
+          });
+        })
+
+        let chartOptions = {
+          credits: {
+            enabled: false
+          },
+          legend: {
+            itemStyle: {
+              color: 'white',
+            },
+          },
+          chart: {
+            type: 'area',
+            backgroundColor: 'rgba(0, 0, 0, 0)',
+            dataLabels: {
+              style: {
+                color: 'white'
+              }
+            }
+          },
+          title: {
+            text: 'Download & Upload Statistics : '+defaultInterface,
+            style: {
+              color: 'white',
+              // fontSize: '14px',
+            }
+          },
+          xAxis: {
+            categories: [],
+            labels: {
+              style: {
+                color: 'white'
+              }
+            }
+          },
+          yAxis: {
+            title: {
+              enabled: false,
+            },
+            labels: {
+              style: {
+                color: 'white'
+              }
+            },
+          },
+          plotOptions: {
+            area: {
+              fillOpacity: 0.3,
+              marker: {
+                enabled: true
+              },
+            },
+          },
+          series: [
+            {
+              name: 'Upload',
+              data: [],
+              color: '#793FDF',
+              fillOpacity: 0.5,
+            },
+            {
+              name: 'Download',
+              data: [],
+              color: '#00DFA2',
+              fillOpacity: 0.5,
+            }
+          ]
+        }
+
+        let initChart = Highcharts.chart('container', chartOptions);
+        
+
+        function updateData(uploadData, downloadData) {
+          if (uploadData !== undefined && downloadData !== undefined) {
+            // Format data with two decimal places
+            chartOptions.series[0].data.push(uploadData);
+            chartOptions.series[1].data.push(downloadData);
+
+            if (chartOptions.series[0].data.length > 5) {
+              chartOptions.series[0].data.shift();
+              chartOptions.series[1].data.shift();
+            }
+
+            chartOptions.xAxis.categories.push(new Date().toLocaleTimeString());
+            if (chartOptions.xAxis.categories.length > 5) {
+              chartOptions.xAxis.categories.shift();
+            }
+
+            if (initChart) {
+              initChart.series[0].setData(chartOptions.series[0].data, false);
+              initChart.series[1].setData(chartOptions.series[1].data, false);
+              initChart.xAxis[0].setCategories(chartOptions.xAxis.categories, false);
+              initChart.redraw();
+            }
+          }
+        }
+
+        const options = {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric',
+          timeZoneName: 'short',
+        };
+
+        const locale = 'id-ID'; // 'id-ID' represents the Indonesian locale
+
+        const formattedDate = new Date().toLocaleString(locale, options);
+        console.log(formattedDate);
+
+        $("#hour").html(formattedDate)
+        
+        $(document).on("click", "#nonactive-user-card", function(e) {
+          $("#nonactiveUserModal").modal("show")
+        })
+
+        $(document).on("click", "#active-user-card", function(e) {
+          $("#activeUserModal").modal("show")
+        })
+      });
+    </script>
+    <!-- End custom js for this page -->
+  </body>
+</html>

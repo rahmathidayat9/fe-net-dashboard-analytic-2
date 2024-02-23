@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Corona Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="./assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="./assets/images/favicon.png" />
+  </head>
+  <body>
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="row w-100 m-0">
+          <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
+            <div class="card col-lg-4 mx-auto mb-5">
+              <div class="card-body px-5 py-5">
+                <h3 class="card-title text-left mb-3">Login</h3>
+                <form>
+                    <div id="notify" style="display: none;">
+                        <div class="alert alert-danger"><span id="notification"></span></div>
+                    </div>
+                  <div class="form-group">
+                    <label>Username or email *</label>
+                    <input type="text" id="username" class="form-control p_input">
+                  </div>
+                  <div class="form-group">
+                    <label>Password *</label>
+                    <input type="password" id="password" class="form-control p_input">
+                  </div>
+                  <div class="form-group d-flex align-items-center justify-content-between">
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="" id="show-password"> Show Password </label>
+                    </div>
+                    <!-- <a href="#" class="forgot-pass">Forgot password</a> -->
+                  </div>
+                  <div class="text-center">
+                    <button type="submit" id="login-btn" class="btn btn-primary btn-block enter-btn">Login</button>
+                  </div>
+                  <!-- <p class="sign-up">Don't have an Account?<a href="#"> Sign Up</a></p> -->
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+        </div>
+        <!-- row ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <script src="./assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="./assets/js/off-canvas.js"></script>
+    <script src="./assets/js/misc.js"></script>
+    <script src="./assets/js/settings.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/vue@3.4.15/dist/vue.global.prod.js"></script>
+    <script src="https://unpkg.com/vue@3.4.15/dist/vue.global.prod.js"></script>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            message: 'Hello, Vue.js!'
+          };
+        }
+      });
+
+      // Mount the Vue instance to the specified HTML element
+      app.mount('#app');
+    </script>
+    <script>
+        $(document).ready(function () {
+            // const API_URL = 'http://103.127.133.99:86/api'
+            // const API_URL = 'http://203.175.10.32:86/api'
+            // const API_URL = 'http://localhost:3000/api'
+            const API_URL = 'http://103.127.133.99:86/api'
+
+            localStorage.removeItem('username')
+            localStorage.removeItem('name')
+            localStorage.removeItem('role')
+            localStorage.removeItem('user_id')
+
+            $(document).on('click', '#show-password', function(e) {
+              // Get the password input element
+              var passwordInput = $("#password");
+
+              // Check if the type attribute is "password"
+              if (passwordInput.attr("type") === "password") {
+                // Change the type to "text" to show the password
+                passwordInput.attr("type", "text");
+              } else {
+                // Change the type back to "password" to hide the password
+                passwordInput.attr("type", "password");
+              }
+            });
+
+            $(document).on("click", "#login-btn", function(e) {
+                e.preventDefault()
+
+                let username = $("#username").val()
+                let password = $("#password").val()
+
+                $.ajax({
+                  type: "POST",
+                  url: API_URL+"/auth/login",
+                  data: {
+                    username: username,
+                    password: password
+                  },
+                  dataType: "JSON",
+                  success: function (response) {
+                    let data = response.data
+                    localStorage.setItem('username', data.username)
+                    localStorage.setItem('name', data.name)
+                    localStorage.setItem('role', data.jabatan)
+                    localStorage.setItem('user_id', data.user_id)
+
+                    setTimeout(() => {
+                      document.location.href = "/home.html"
+                    }, 1000);
+                  },
+                  error: function(error) {
+                    setTimeout(() => {
+                        $("#notification").html('Login Gagal')
+                        $("#notify").css({
+                            display: 'block',
+                        })
+                    }, 200);
+
+                    setTimeout(() => {
+                        $("#notification").html('')
+                        $("#notify").css({
+                            display: 'none',
+                        })    
+                    }, 2000);
+                  }
+                });
+
+                // if (username && password == "admin") {
+                //     setTimeout(() => {
+                //         document.location.href = "/home.html"
+                //     }, 1000);
+                // } else {
+                    
+                //     setTimeout(() => {
+                //         $("#notification").html('Login Gagal')
+                //         $("#notify").css({
+                //             display: 'block',
+                //         })
+                //     }, 200);
+
+                //     setTimeout(() => {
+                //         $("#notification").html('')
+                //         $("#notify").css({
+                //             display: 'none',
+                //         })    
+                //     }, 2000);
+                // }
+            })
+        });
+    </script>
+    <!-- endinject -->
+  </body>
+</html>
